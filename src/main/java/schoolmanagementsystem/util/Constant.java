@@ -1,5 +1,7 @@
 package schoolmanagementsystem.util;
 
+import java.security.PublicKey;
+
 public class Constant {
 
     private Constant() {
@@ -35,4 +37,8 @@ public class Constant {
     public static final String TOKEN_UNSUPPORTED = "JWT token is unsupported: {}";
     public static final String JWT_CLAIMS_EMPTY = "JWT claims string is empty: {}";
     public static final String UNAUTHORIZED_ERROR = "Unauthorized error: {}";
+    public static final String SCHOOL_SERVICE_STARTED = "School Service Test case execution has been started";
+    public static final String SCHOOL_SERVICE_FINISHED = "School Service Test case has been execution finished";
+    public static final String SCHOOL_CONTROLLER_STARTED = "School Controller Test case execution has been started";
+    public static final String SCHOOL_CONTROLLER_FINISHED = "School Controller Test case execution has been finished";
 }
