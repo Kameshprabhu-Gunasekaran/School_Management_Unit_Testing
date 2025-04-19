@@ -41,4 +41,10 @@ public class Constant {
     public static final String SCHOOL_SERVICE_FINISHED = "School Service Test case has been execution finished";
     public static final String SCHOOL_CONTROLLER_STARTED = "School Controller Test case execution has been started";
     public static final String SCHOOL_CONTROLLER_FINISHED = "School Controller Test case execution has been finished";
+    public static final String STUDENT_SERVICE_STARTED = "Student Service Test case execution has been started";
+    public static final String STUDENT_SERVICE_FINISHED = "Student Service Test case execution has been finished";
+    public static final String TUTOR_SERVICE_STARTED = "Tutor Service Test case execution has been started";
+    public static final String TUTOR_SERVICE_FINISHED = "Tutor Service Test case execution has been finished";
+    public static final String COURSE_SERVICE_STARTED = "Course Service test case execution has been started";
+    public static final String COURSE_SERVICE_FINISHED = "Course Service test case execution has been finished";
 }

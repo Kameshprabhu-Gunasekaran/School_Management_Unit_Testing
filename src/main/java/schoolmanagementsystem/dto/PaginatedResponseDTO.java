@@ -10,15 +10,15 @@ public class PaginatedResponseDTO<T> {
     private long totalElements;
     private int totalPages;
 
-//    public PaginatedResponseDTO() {}
-//
-//    public PaginatedResponseDTO(List<T> data, int pageNumber, int pageSize, long totalElements, int totalPages) {
-//        this.data = data;
-//        this.pageNumber = pageNumber;
-//        this.pageSize = pageSize;
-//        this.totalElements = totalElements;
-//        this.totalPages = totalPages;
-//    }
+    public PaginatedResponseDTO() {}
+
+    public PaginatedResponseDTO(List<T> data, int pageNumber, int pageSize, long totalElements, int totalPages) {
+        this.data = data;
+        this.pageNumber = pageNumber;
+        this.pageSize = pageSize;
+        this.totalElements = totalElements;
+        this.totalPages = totalPages;
+    }
 
     public List<T> getData() {
         return data;

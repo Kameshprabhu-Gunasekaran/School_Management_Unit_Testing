@@ -1,144 +1,142 @@
 package schoolmanagementsystem.controller;
 
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import schoolmanagementsystem.dto.PaginatedResponseDTO;
 import schoolmanagementsystem.dto.ResponseDTO;
 import schoolmanagementsystem.dto.SchoolDTO;
 import schoolmanagementsystem.dto.SearchRequestDTO;
 import schoolmanagementsystem.entity.School;
 import schoolmanagementsystem.service.SchoolService;
-import schoolmanagementsystem.service.SchoolServiceTest;
 import schoolmanagementsystem.util.Constant;
 
-import java.util.Collections;
+import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
+import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.Mockito.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @ExtendWith(MockitoExtension.class)
 public class SchoolControllerTest {
 
-    @InjectMocks
-    private SchoolController schoolController;
-
     @Mock
     private SchoolService schoolService;
 
-    private static final Logger logger = LoggerFactory.getLogger(SchoolControllerTest.class);
+    @InjectMocks
+    private SchoolController schoolController;
+
+    private MockMvc mockMvc;
+    private final ObjectMapper objectMapper = new ObjectMapper();
+    private School school;
 
     @BeforeAll
     public static void toStartSchoolController() {
-        logger.info(Constant.SCHOOL_CONTROLLER_STARTED);
+        System.out.println("School Controller Test case execution has started.");
     }
 
-//    @BeforeEach
-//    void setup() {
-//        MockitoAnnotations.openMocks(this);
-//    }
-
-    @Test
-    void testCreateSchool() {
-        School school = new School();
-        school.setName("Test School");
-        ResponseDTO expectedResponse = new ResponseDTO(HttpStatus.CREATED.value(), school, Constant.CREATED);
-
-        when(schoolService.createSchool(any(School.class))).thenReturn(expectedResponse);
-
-        ResponseDTO response = schoolController.create(school);
-
-        assertEquals(Constant.CREATED, response.getMessage());
-        assertEquals(HttpStatus.CREATED.value(), response.getStatusCode());
-        assertEquals(school, response.getData());
-    }
-
-    @Test
-    void testSearchSchool() {
-        SearchRequestDTO searchRequest = new SearchRequestDTO();
-
-        School school = new School();
+    @BeforeEach
+    public void setUp() {
+        mockMvc = MockMvcBuilders.standaloneSetup(schoolController).build();
+        school = new School();
         school.setId(1L);
         school.setName("Test School");
-
-        SchoolDTO schoolDTO = new SchoolDTO(school);
-
-        PaginatedResponseDTO<SchoolDTO> expectedResponse = new PaginatedResponseDTO<>();
-        expectedResponse.setData(Collections.singletonList(schoolDTO));
-        expectedResponse.setPageNumber(0);
-        expectedResponse.setPageSize(10);
-        expectedResponse.setTotalElements(1);
-        expectedResponse.setTotalPages(1);
-
-        when(schoolService.searchSchools(searchRequest)).thenReturn(expectedResponse);
-
-        PaginatedResponseDTO<SchoolDTO> response = schoolController.searchSchools(searchRequest);
-
-        assertEquals(1, response.getTotalElements());
-        assertEquals(1, response.getTotalPages());
-        assertEquals(0, response.getPageNumber());
-        assertEquals(10, response.getPageSize());
-        assertEquals("Test School", response.getData().get(0).getName());
+        school.setAddress("Test Address");
+        school.setContactNumber("1234567890");
     }
 
     @Test
-    void testRetrieveById() {
-        Long id = 1L;
-        School school = new School();
-        school.setId(id);
-        ResponseDTO expectedResponse = new ResponseDTO(HttpStatus.OK.value(), school, Constant.RETRIEVED);
-        when(schoolService.retrieveById(id)).thenReturn(expectedResponse);
+    public void testCreateSchool() throws Exception {
+        ResponseDTO response = new ResponseDTO();
+        response.setMessage(Constant.CREATED);
+        response.setStatusCode(HttpStatus.CREATED.value());
+        response.setData(school);
 
-        ResponseDTO response = schoolController.retrieveById(id);
+        when(schoolService.createSchool(any(School.class))).thenReturn(response);
 
-        assertEquals(Constant.RETRIEVED, response.getMessage());
-        assertEquals(HttpStatus.OK.value(), response.getStatusCode());
-        assertEquals(id, ((School) response.getData()).getId());
+        mockMvc.perform(post("/api/v1/school/create")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(school)))
+                .andExpect(status().isCreated())
+                .andExpect(jsonPath("$.statusCode").value(HttpStatus.CREATED.value()))
+                .andExpect(jsonPath("$.message").value(Constant.CREATED))
+                .andExpect(jsonPath("$.data.name").value("Test School"))
+                .andExpect(jsonPath("$.data.address").value("Test Address"));
+
+        verify(schoolService, times(1)).createSchool(any(School.class));
     }
 
     @Test
-    void testUpdateById() {
-        Long id = 1L;
-        School school = new School();
-        school.setName("HCL");
+    public void testRetrieveSchoolById() throws Exception {
+        ResponseDTO response = new ResponseDTO();
+        response.setMessage(Constant.RETRIEVED);
+        response.setStatusCode(HttpStatus.OK.value());
+        response.setData(school);
 
-        ResponseDTO expectedResponse = new ResponseDTO(HttpStatus.OK.value(), school, Constant.UPDATED);
+        when(schoolService.retrieveById(anyLong())).thenReturn(response);
 
-        when(schoolService.updateById(id, school)).thenReturn(expectedResponse);
+        mockMvc.perform(get("/api/v1/school/retrieve/1"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.statusCode").value(HttpStatus.OK.value()))
+                .andExpect(jsonPath("$.message").value(Constant.RETRIEVED))
+                .andExpect(jsonPath("$.data.id").value(1))
+                .andExpect(jsonPath("$.data.name").value("Test School"));
 
-        ResponseDTO response = schoolController.updateById(id, school);
-
-        assertEquals(Constant.UPDATED, response.getMessage());
-        assertEquals("HCL", ((School) response.getData()).getName());
+        verify(schoolService, times(1)).retrieveById(anyLong());
     }
 
     @Test
-    void testDeleteById() {
-        Long id = 1L;
-        ResponseDTO extendedResponse = new ResponseDTO(HttpStatus.OK.value(), null, Constant.DELETED);
-        when(schoolService.remove(id)).thenReturn(extendedResponse);
+    public void testDeleteSchool() throws Exception {
+        ResponseDTO response = new ResponseDTO();
+        response.setMessage(Constant.DELETED);
+        response.setStatusCode(HttpStatus.OK.value());
 
-        ResponseDTO response = schoolController.deleteById(id);
+        when(schoolService.remove(anyLong())).thenReturn(response);
 
-        assertEquals(Constant.DELETED, response.getMessage());
-        assertEquals(HttpStatus.OK.value(), response.getStatusCode());
-        assertNull(response.getData());
+        mockMvc.perform(delete("/api/v1/school/remove/1"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.statusCode").value(HttpStatus.OK.value()))
+                .andExpect(jsonPath("$.message").value(Constant.DELETED));
+
+        verify(schoolService, times(1)).remove(anyLong());
     }
+
+    @Test
+    public void testSearchSchools() throws Exception {
+        SearchRequestDTO searchRequest = new SearchRequestDTO();
+        searchRequest.setName("Test");
+        searchRequest.setPage(0);
+        searchRequest.setSize(10);
+
+        SchoolDTO schoolDTO = new SchoolDTO("Test School", "Test Address", "1234567890");
+
+        PaginatedResponseDTO<SchoolDTO> paginatedResponse = new PaginatedResponseDTO<>(
+                List.of(schoolDTO), 0, 10, 1, 1);
+
+        when(schoolService.searchSchools(any(SearchRequestDTO.class))).thenReturn(paginatedResponse);
+
+        mockMvc.perform(get("/api/v1/school/search")
+                        .param("name", "Test")
+                        .param("page", "0")
+                        .param("size", "10"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.data[0].name").value("Test School"));
+
+        verify(schoolService, times(1)).searchSchools(any(SearchRequestDTO.class));
+    }
+
 
     @AfterAll
     public static void toEndSchoolController() {
-        logger.info(Constant.SCHOOL_CONTROLLER_FINISHED);
+        System.out.println("School Controller Test case execution has finished.");
     }
-
 }

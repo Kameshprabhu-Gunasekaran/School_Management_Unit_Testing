@@ -14,6 +14,9 @@ public class SchoolDTO {
         this.address = school.getAddress();
     }
 
+    public SchoolDTO(String testSchool, String testAddress, String number) {
+    }
+
 
     public Long getId() {
         return id;
