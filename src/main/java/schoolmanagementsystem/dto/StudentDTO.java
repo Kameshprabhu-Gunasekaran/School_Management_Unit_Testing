@@ -9,6 +9,9 @@ public class StudentDTO {
     private String schoolId;
     private String tutorId;
 
+    public StudentDTO() {
+    }
+
     public StudentDTO(Long id, String name, Long dob, String contactNumber, String schoolId, String tutorId) {
         this.id = id;
         this.name = name;

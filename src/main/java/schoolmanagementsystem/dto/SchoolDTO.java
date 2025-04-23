@@ -14,7 +14,9 @@ public class SchoolDTO {
         this.address = school.getAddress();
     }
 
-    public SchoolDTO(String testSchool, String testAddress, String number) {
+    public SchoolDTO(String name, String address, String number) {
+        this.name = name;
+        this.address = address;
     }
 
 

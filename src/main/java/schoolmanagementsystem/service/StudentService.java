@@ -38,7 +38,6 @@ public class StudentService {
 
     }
 
-
     @Transactional
     public ResponseDTO create(final StudentDTO studentDTO) {
         final Student student = this.schoolMapper.toEntity(studentDTO);

@@ -6,6 +6,9 @@ public class CourseDTO {
     private String schoolId;
     private String tutorId;
 
+    public CourseDTO() {
+    }
+
     public CourseDTO(String name, Long fees, String schoolId, String tutorId) {
         this.name = name;
         this.fees = fees;

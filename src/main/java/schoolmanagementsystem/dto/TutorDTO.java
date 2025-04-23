@@ -1,7 +1,11 @@
 package schoolmanagementsystem.dto;
 
+import jakarta.validation.constraints.NotEmpty;
+
 public class TutorDTO {
+    @NotEmpty(message = "Name must not be empty")
     private String name;
+    @NotEmpty(message = "Subject must not be empty")
     private String subject;
     private Double salary;
     private String month;

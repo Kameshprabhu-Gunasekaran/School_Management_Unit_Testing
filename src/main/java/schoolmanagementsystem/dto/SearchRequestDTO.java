@@ -10,19 +10,6 @@ public class SearchRequestDTO {
     private String address;
     private Long id;
 
-//    public SearchRequestDTO() {
-//    }
-//
-//    public SearchRequestDTO(int page, int size, String sortBy, String sortDir, String name, String address, Long id) {
-//        this.page = page;
-//        this.size = size;
-//        this.sortBy = sortBy;
-//        this.sortDir = sortDir;
-//        this.name = name;
-//        this.address = address;
-//        this.id = id;
-//    }
-
     public int getPage() {
         return page;
     }

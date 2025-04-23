@@ -136,7 +136,7 @@ public class CourseServiceTest {
     }
 
     @Test
-    void testRetrieveByIdSuccess() {
+    void testRetrieveById() {
         Course course = new Course();
         course.setId(1L);
         course.setName("Math 101");
@@ -185,7 +185,7 @@ public class CourseServiceTest {
     }
 
     @Test
-    void testDeleteCourseSuccess() {
+    void testDeleteCourse() {
         when(courseRepository.existsById(1L)).thenReturn(true);
 
         ResponseDTO response = courseService.remove(1L);

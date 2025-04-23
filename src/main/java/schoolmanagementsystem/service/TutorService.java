@@ -39,7 +39,8 @@ public class TutorService {
     @Transactional
     public ResponseDTO create(final TutorDTO tutorDTO) {
         final Tutor tutor = this.schoolMapper.toEntity(tutorDTO);
-
+        if(tutorDTO.getName().isEmpty())
+            throw new BadRequestServiceAlertException("Invalid Data");
         final School school = this.schoolRepository.findById(Long.parseLong(tutorDTO.getSchoolId()))
                 .orElseThrow(() -> new BadRequestServiceAlertException(Constant.SCHOOL_ID_NOT_FOUND));
         tutor.setSchool(school);
@@ -59,7 +60,6 @@ public class TutorService {
 
         return responseDTO;
     }
-
 
     public PaginatedResponseDTO<Tutor> retrieveAll(int page, int size, String sortBy, String sortDir, String name, String subject) {
         final Sort sort = sortDir.equalsIgnoreCase("desc") ? Sort.by(sortBy).descending() : Sort.by(sortBy).ascending();

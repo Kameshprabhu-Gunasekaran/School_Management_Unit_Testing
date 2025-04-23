@@ -27,6 +27,9 @@ public class Enrollment {
     @ManyToOne
     private Course course;
 
+    public Enrollment() {
+    }
+
     public Long getId() {
         return id;
     }

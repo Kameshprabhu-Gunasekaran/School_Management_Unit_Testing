@@ -6,6 +6,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
@@ -39,9 +41,11 @@ public class SchoolControllerTest {
     private final ObjectMapper objectMapper = new ObjectMapper();
     private School school;
 
+    private static final Logger logger = LoggerFactory.getLogger(SchoolControllerTest.class);
+
     @BeforeAll
     public static void toStartSchoolController() {
-        System.out.println("School Controller Test case execution has started.");
+        logger.info(Constant.SCHOOL_CONTROLLER_STARTED);
     }
 
     @BeforeEach
@@ -111,6 +115,35 @@ public class SchoolControllerTest {
     }
 
     @Test
+    public void testUpdateById() throws Exception {
+        School updatedSchool = new School();
+        updatedSchool.setId(1L);
+        updatedSchool.setName("Updated School");
+        updatedSchool.setAddress("Updated Address");
+        updatedSchool.setContactNumber("0987654321");
+
+        ResponseDTO response = new ResponseDTO();
+        response.setMessage(Constant.UPDATED);
+        response.setStatusCode(HttpStatus.OK.value());
+        response.setData(updatedSchool);
+
+        when(schoolService.updateById(anyLong(), any(School.class))).thenReturn(response);
+
+        mockMvc.perform(put("/api/v1/school/update/1")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(updatedSchool)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.statusCode").value(HttpStatus.OK.value()))
+                .andExpect(jsonPath("$.message").value(Constant.UPDATED))
+                .andExpect(jsonPath("$.data.name").value("Updated School"))
+                .andExpect(jsonPath("$.data.address").value("Updated Address"))
+                .andExpect(jsonPath("$.data.contactNumber").value("0987654321"));
+
+        verify(schoolService, times(1)).updateById(anyLong(), any(School.class));
+    }
+
+
+    @Test
     public void testSearchSchools() throws Exception {
         SearchRequestDTO searchRequest = new SearchRequestDTO();
         searchRequest.setName("Test");
@@ -137,6 +170,6 @@ public class SchoolControllerTest {
 
     @AfterAll
     public static void toEndSchoolController() {
-        System.out.println("School Controller Test case execution has finished.");
+        logger.info(Constant.SCHOOL_CONTROLLER_FINISHED);
     }
 }

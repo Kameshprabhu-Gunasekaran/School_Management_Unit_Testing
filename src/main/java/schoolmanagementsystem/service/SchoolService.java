@@ -35,7 +35,7 @@ public class SchoolService {
         final School savedSchool = this.schoolRepository.save(school);
         final ResponseDTO responseDTO = new ResponseDTO();
         responseDTO.setMessage(Constant.CREATED);
-        responseDTO.setStatusCode(HttpStatus.OK.value());
+        responseDTO.setStatusCode(HttpStatus.CREATED.value());
         responseDTO.setData(savedSchool);
         return responseDTO;
     }

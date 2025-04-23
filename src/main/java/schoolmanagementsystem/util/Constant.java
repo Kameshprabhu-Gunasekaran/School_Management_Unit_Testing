@@ -47,4 +47,19 @@ public class Constant {
     public static final String TUTOR_SERVICE_FINISHED = "Tutor Service Test case execution has been finished";
     public static final String COURSE_SERVICE_STARTED = "Course Service test case execution has been started";
     public static final String COURSE_SERVICE_FINISHED = "Course Service test case execution has been finished";
+    public static final String ENROLLMENT_SERVICE_STARTED = "Enrollment Service test case execution has been started";
+    public static final String ENROLLMENT_SERVICE_FINISHED ="Enrollment Service test case execution has been finished";
+    public static final String STUDENT_ENROLLED_AND_TUTOR_SALARY_UPDATED = "Student enrolled successfully, and tutor's salary updated";
+    public static final String SALARY_SERVICE_STARTED = "Salary Service test case execution has been started";
+    public static final String SALARY_SERVICE_FINISHED = "Salary Service test case execution has been finished";
+    public static final String STUDENT_CONTROLLER_STARTED = "Student Controller test case execution has been started";
+    public static final String STUDENT_CONTROLLER_FINISHED = "Student Controller test case execution has been finished";
+    public static final String TUTOR_CONTROLLER_STARTED = "Tutor Controller test case execution has been started";
+    public static final String TUTOR_CONTROLLER_FINISHED = "Tutor Controller test case execution has been finished";
+    public static final String COURSE_CONTROLLER_STARTED = "Course Controller test case execution has been started";
+    public static final String COURSE_CONTROLLER_FINISHED = "Course Controller test case execution has been finished";
+    public static final String ENROLLMENT_CONTROLLER_STARTED = "Enrollment Controller test case execution has been started";
+    public static final String ENROLLMENT_CONTROLLER_FINISHED = "Enrollment Controller test case execution has been finished";
+    public static final String SALARY_CONTROLLER_STARTED = "Salary Controller test case execution has been started";
+    public static final String SALARY_CONTROLLER_FINISHED = "Salary Controller test case execution has been finished";
 }

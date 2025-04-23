@@ -7,6 +7,9 @@ public class EnrollmentDTO {
     private String studentId;
     private String courseId;
 
+    public EnrollmentDTO() {
+    }
+
     public EnrollmentDTO(Long id, String feesPaid, String enrollmentStatus, String studentId, String courseId) {
         this.id = id;
         this.feesPaid = feesPaid;
