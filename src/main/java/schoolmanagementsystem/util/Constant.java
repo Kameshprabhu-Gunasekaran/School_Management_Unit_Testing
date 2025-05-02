@@ -61,5 +61,5 @@ public class Constant {
     public static final String ENROLLMENT_CONTROLLER_STARTED = "Enrollment Controller test case execution has been started";
     public static final String ENROLLMENT_CONTROLLER_FINISHED = "Enrollment Controller test case execution has been finished";
     public static final String SALARY_CONTROLLER_STARTED = "Salary Controller test case execution has been started";
-    public static final String SALARY_CONTROLLER_FINISHED = "Salary Controller test case execution has been finished";
+    public static final String SALARY_CONTROLLER_FINISHED = "Salary  Controller test case execution has been finished";
 }

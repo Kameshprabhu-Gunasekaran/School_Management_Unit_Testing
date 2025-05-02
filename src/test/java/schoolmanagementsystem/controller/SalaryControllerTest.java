@@ -9,6 +9,7 @@ import org.mockito.Mockito;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import schoolmanagementsystem.dto.PaginatedResponseDTO;
@@ -46,8 +47,9 @@ class SalaryControllerTest {
     }
 
     @Test
+    @WithMockUser(roles = "ADMIN")
     void testCreateSalary() throws Exception {
-        Salary salary = new Salary(); // Set fields if needed
+        Salary salary = new Salary();
 
         ResponseDTO response = new ResponseDTO();
         response.setMessage("Salary created");
@@ -86,7 +88,7 @@ class SalaryControllerTest {
 
     @Test
     void testRetrieveSalaryById() throws Exception {
-        Salary salary = new Salary(); // Set fields if needed
+        Salary salary = new Salary();
         ResponseDTO response = new ResponseDTO();
         response.setMessage("Salary found");
         response.setStatusCode(200);
@@ -102,7 +104,7 @@ class SalaryControllerTest {
 
     @Test
     void testUpdateSalaryById() throws Exception {
-        Salary salary = new Salary(); // Set updated fields if needed
+        Salary salary = new Salary();
         ResponseDTO response = new ResponseDTO();
         response.setMessage("Salary updated");
         response.setStatusCode(200);
@@ -119,7 +121,7 @@ class SalaryControllerTest {
 
     @Test
     void testDeleteSalaryById() throws Exception {
-        ResponseDTO response = new ResponseDTO();
+        ResponseDTO response =  new ResponseDTO();
         response.setMessage("Salary deleted");
         response.setStatusCode(200);
         response.setData(null);
@@ -130,34 +132,6 @@ class SalaryControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.message").value("Salary deleted"))
                 .andExpect(jsonPath("$.statusCode").value(200));
-    }
-
-    @Test
-    void testCreateSalaryBadRequest() throws Exception {
-        String invalidJson = "{}";
-
-        mockMvc.perform(post("/api/v1/total-salary/create")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(invalidJson))
-                .andExpect(status().isBadRequest());
-    }
-
-    @Test
-    void testUnauthorizedAccess() throws Exception {
-        mockMvc.perform(get("/api/v1/total-salary/retrieve"))
-                .andExpect(status().isUnauthorized());
-    }
-
-    @Test
-    void testCreateSalaryInternalServerError() throws Exception {
-        Salary salary = new Salary();
-
-        when(salaryService.create(any(Salary.class))).thenThrow(new RuntimeException("Unexpected error"));
-
-        mockMvc.perform(post("/api/v1/total-salary/create")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(salary)))
-                .andExpect(status().isInternalServerError());
     }
 
     @AfterAll

@@ -30,9 +30,9 @@ public class TutorController {
         this.tutorService = tutorService;
     }
 
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @PostMapping("/create")
     @ResponseStatus(HttpStatus.CREATED)
-    @PreAuthorize("hasRole('ADMIN')")
     public ResponseDTO create(@Valid @RequestBody final TutorDTO tutorDTO) {
         return this.tutorService.create(tutorDTO);
     }

@@ -4,8 +4,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.context.request.WebRequest;
 import schoolmanagementsystem.dto.ResponseDTO;
+
+import org.springframework.security.access.AccessDeniedException;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
@@ -38,5 +41,15 @@ public class GlobalExceptionHandler {
         responseDTO.setStatusCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
         responseDTO.setData(null);
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(responseDTO);
+    }
+
+    @ExceptionHandler(AccessDeniedException.class)
+    public ResponseEntity<ResponseDTO> handleAccessDeniedException(final AccessDeniedException exception, WebRequest webRequest) {
+        final ResponseDTO responseDTO = new ResponseDTO();
+        exception.printStackTrace();
+        responseDTO.setMessage(exception.getMessage());
+        responseDTO.setStatusCode(HttpStatus.UNAUTHORIZED.value());
+        responseDTO.setData(null);
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(responseDTO);
     }
 }

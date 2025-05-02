@@ -13,7 +13,7 @@ import schoolmanagementsystem.entity.Tutor;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2025-04-16T16:59:41-0700",
+    date = "2025-04-24T12:18:19-0700",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 23.0.1 (Oracle Corporation)"
 )
 @Component
@@ -25,20 +25,12 @@ public class SchoolMapperImpl implements SchoolMapper {
             return null;
         }
 
-        Long id = null;
-        String name = null;
-        Long dob = null;
-        String contactNumber = null;
+        StudentDTO studentDTO = new StudentDTO();
 
-        id = student.getId();
-        name = student.getName();
-        dob = student.getDob();
-        contactNumber = student.getContactNumber();
-
-        String schoolId = null;
-        String tutorId = null;
-
-        StudentDTO studentDTO = new StudentDTO( id, name, dob, contactNumber, schoolId, tutorId );
+        studentDTO.setId( student.getId() );
+        studentDTO.setName( student.getName() );
+        studentDTO.setDob( student.getDob() );
+        studentDTO.setContactNumber( student.getContactNumber() );
 
         return studentDTO;
     }
@@ -97,17 +89,12 @@ public class SchoolMapperImpl implements SchoolMapper {
             return null;
         }
 
-        String name = null;
-        Long fees = null;
-        String schoolId = null;
-        String tutorId = null;
+        CourseDTO courseDTO1 = new CourseDTO();
 
-        name = courseDTO.getName();
-        fees = courseDTO.getFees();
-        schoolId = courseDTO.getSchoolId();
-        tutorId = courseDTO.getTutorId();
-
-        CourseDTO courseDTO1 = new CourseDTO( name, fees, schoolId, tutorId );
+        courseDTO1.setName( courseDTO.getName() );
+        courseDTO1.setFees( courseDTO.getFees() );
+        courseDTO1.setSchoolId( courseDTO.getSchoolId() );
+        courseDTO1.setTutorId( courseDTO.getTutorId() );
 
         return courseDTO1;
     }
@@ -132,19 +119,13 @@ public class SchoolMapperImpl implements SchoolMapper {
             return null;
         }
 
-        Long id = null;
-        String feesPaid = null;
-        String enrollmentStatus = null;
-        String studentId = null;
-        String courseId = null;
+        EnrollmentDTO enrollmentDTO1 = new EnrollmentDTO();
 
-        id = enrollmentDTO.getId();
-        feesPaid = enrollmentDTO.getFeesPaid();
-        enrollmentStatus = enrollmentDTO.getEnrollmentStatus();
-        studentId = enrollmentDTO.getStudentId();
-        courseId = enrollmentDTO.getCourseId();
-
-        EnrollmentDTO enrollmentDTO1 = new EnrollmentDTO( id, feesPaid, enrollmentStatus, studentId, courseId );
+        enrollmentDTO1.setId( enrollmentDTO.getId() );
+        enrollmentDTO1.setFeesPaid( enrollmentDTO.getFeesPaid() );
+        enrollmentDTO1.setEnrollmentStatus( enrollmentDTO.getEnrollmentStatus() );
+        enrollmentDTO1.setStudentId( enrollmentDTO.getStudentId() );
+        enrollmentDTO1.setCourseId( enrollmentDTO.getCourseId() );
 
         return enrollmentDTO1;
     }

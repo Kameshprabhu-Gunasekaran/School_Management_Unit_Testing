@@ -97,7 +97,7 @@ public class TutorServiceTest {
         assertEquals(Constant.CREATED, response.getMessage());
         assertEquals(HttpStatus.CREATED.value(), response.getStatusCode());
         assertEquals(tutor, response.getData());
-        verify(salaryRepository, times(1)).save(any(Salary.class));
+        verify(this.salaryRepository, times(1)).save(any(Salary.class));
     }
 
     @Test
