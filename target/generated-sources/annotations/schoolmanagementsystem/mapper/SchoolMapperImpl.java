@@ -13,7 +13,7 @@ import schoolmanagementsystem.entity.Tutor;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2025-05-02T14:51:39-0700",
+    date = "2025-05-03T13:05:22-0700",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 23.0.1 (Oracle Corporation)"
 )
 @Component
