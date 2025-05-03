@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.9.xsd">
+
+    <changeSet id="7e5c6d18-e15f-4e14-bcdf-c7452ddd8d9b" author="Kamesh">
+        <createTable tableName="course">
+            <column name="id" type="BIGINT">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="fees" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="school_id" type="BIGINT"/>
+            <column name="tutor_id" type="BIGINT"/>
+        </createTable>
+
+        <addForeignKeyConstraint
+                baseTableName="course"
+                baseColumnNames="school_id"
+                constraintName="fk_course_school"
+                referencedTableName="school"
+                referencedColumnNames="id"
+                onDelete="SET NULL"/>
+
+        <addForeignKeyConstraint
+                baseTableName="course"
+                baseColumnNames="tutor_id"
+                constraintName="fk_course_tutor"
+                referencedTableName="tutor"
+                referencedColumnNames="id"
+                onDelete="SET NULL"/>
+    </changeSet>
+
+</databaseChangeLog>
