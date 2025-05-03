@@ -1,0 +1,66 @@
+{
+  "databaseChangeLog": [
+    {
+      "changeSet": {
+        "id": "fa236828-94f7-4c83-9743-e4f9b5554bb1",
+        "author": "kamesh",
+        "changes": [
+          {
+            "createTable": {
+              "tableName": "salary",
+              "columns": [
+                {
+                  "column": {
+                    "name": "id",
+                    "type": "BIGINT",
+                    "autoIncrement": true,
+                    "constraints": {
+                      "primaryKey": true,
+                      "nullable": false
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "month",
+                    "type": "VARCHAR(255)",
+                    "constraints": {
+                      "nullable": false
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "salary_paid",
+                    "type": "BOOLEAN",
+                    "constraints": {
+                      "nullable": false
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "tutor_id",
+                    "type": "BIGINT",
+                    "constraints": {
+                      "nullable": false
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "addForeignKeyConstraint": {
+              "baseTableName": "salary",
+              "baseColumnNames": "tutor_id",
+              "constraintName": "fk_salary_tutor",
+              "referencedTableName": "tutor",
+              "referencedColumnNames": "id"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

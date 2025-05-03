@@ -1,0 +1,43 @@
+<!--<databaseChangeLog-->
+<!--        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"-->
+<!--        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"-->
+<!--        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-->
+<!--                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">-->
+
+<!--    <changeSet id="60b7c577-30b4-4d76-888c-2842fa697cc0" author="Kamesh">-->
+<!--        <insert tableName="school">-->
+<!--            <column name="id" value="604b0aef-510f-47de-8877-302b36e7a2be"/>-->
+<!--            <column name="name" value="Sunshine High School"/>-->
+<!--            <column name="address" value="123 Main Street, Chennai"/>-->
+<!--            <column name="email" value="contact@sunshine.edu"/>-->
+<!--        </insert>-->
+
+<!--        <insert tableName="school">-->
+<!--            <column name="id" value="bbb61751-26d4-4fe4-bfe0-64abf3ea47ec"/>-->
+<!--            <column name="name" value="Green Valley School"/>-->
+<!--            <column name="address" value="456 Park Road, Coimbatore"/>-->
+<!--            <column name="email" value="info@greenvalley.edu"/>-->
+<!--        </insert>-->
+
+<!--        <insert tableName="school">-->
+<!--            <column name="id" value="ffc9b419-0480-460d-b82c-a53d7e8e471a"/>-->
+<!--            <column name="name" value="Vels High School"/>-->
+<!--            <column name="address" value="12 Nellai Road, Coimbatore"/>-->
+<!--            <column name="email" value="study@vels.edu"/>-->
+<!--        </insert>-->
+
+<!--        <insert tableName="school">-->
+<!--            <column name="id" value="0680ac8f-d2a8-4736-9aa2-38723066ef4f"/>-->
+<!--            <column name="name" value="FTS High School"/>-->
+<!--            <column name="address" value="1st Main Road, Velur"/>-->
+<!--            <column name="email" value="contact@fts.edu"/>-->
+<!--        </insert>-->
+
+<!--        <insert tableName="school">-->
+<!--            <column name="id" value="275b9041-ff7d-4725-96d4-8247426209cc"/>-->
+<!--            <column name="name" value="HCL High School"/>-->
+<!--            <column name="address" value="121 IT Road, Chennai"/>-->
+<!--            <column name="email" value="study@hcl.edu"/>-->
+<!--        </insert>-->
+<!--    </changeSet>-->
+<!--</databaseChangeLog>-->

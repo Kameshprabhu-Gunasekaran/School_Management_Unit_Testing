@@ -1,0 +1,44 @@
+<!--<databaseChangeLog-->
+<!--        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"-->
+<!--        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"-->
+<!--        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-->
+<!--                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">-->
+
+<!--    <changeSet id="e307342b-9a03-49c7-b0a0-47515abb4b9b" author="Kamesh">-->
+<!--        <insert tableName="student">-->
+<!--            <column name="id" value="37c1a1a7-b3d4-424c-9041-40711c21b4c2"/>-->
+<!--            <column name="name" value="Anjali Kumar"/>-->
+<!--            <column name="email" value="anjali.kumar@example.com"/>-->
+<!--            <column name="school_id" value="9cdcd1d7-bd18-4702-8ec0-d7e6d83fb729"/>-->
+<!--        </insert>-->
+
+<!--        <insert tableName="student">-->
+<!--            <column name="id" value="24807e07-b7c2-4c5a-8b2d-34561598bf04"/>-->
+<!--            <column name="name" value="Ravi Shankar"/>-->
+<!--            <column name="email" value="ravi.shankar@example.com"/>-->
+<!--            <column name="school_id" value="a7eb2f54-2c79-4e15-97cc-136261852492"/>-->
+<!--        </insert>-->
+
+<!--        <insert tableName="student">-->
+<!--            <column name="id" value="8a5a7ba4-b327-4484-bcc5-1a4438dccda9"/>-->
+<!--            <column name="name" value="Suresh Raina"/>-->
+<!--            <column name="email" value="suresh.raina@example.com"/>-->
+<!--            <column name="school_id" value="bb6beb95-d73e-440b-86dd-3b7b665adc30"/>-->
+<!--        </insert>-->
+
+<!--        <insert tableName="student">-->
+<!--            <column name="id" value="329d8a67-f602-4e0c-b6ec-7f0d9dd0f7c4"/>-->
+<!--            <column name="name" value="Kamesh Prabhu"/>-->
+<!--            <column name="email" value="kamesh.prabhu@example.com"/>-->
+<!--            <column name="school_id" value="1b2173a9-aaf4-49e3-8132-8791c541c2bb"/>-->
+<!--        </insert>-->
+
+<!--        <insert tableName="student">-->
+<!--            <column name="id" value="ddba1b0c-78b2-4649-8da9-a4b60ee2c6ee"/>-->
+<!--            <column name="name" value="Vijay Shankar"/>-->
+<!--            <column name="email" value="vijay.shankar@example.com"/>-->
+<!--            <column name="school_id" value="15fab517-504c-4d6f-a04d-f2db5b79c438"/>-->
+<!--        </insert>-->
+<!--    </changeSet>-->
+
+<!--</databaseChangeLog>-->
